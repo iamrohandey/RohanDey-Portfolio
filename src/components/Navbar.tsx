@@ -26,8 +26,7 @@ const Navbar = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    // ❌ removed: setIsOpen(false);
-    // ✅ keep menu open after clicking
+    setIsOpen(false); // ✅ close dropdown after clicking
   };
 
   return (
@@ -45,58 +44,63 @@ const Navbar = () => {
             className="h-14 w-auto transition-all duration-300"
           />
 
-          {/* Right side */}
-          <div className="flex items-center">
-            {/* Sliding nav strip */}
-            <div
-              className={`flex items-center space-x-4 transform transition-all duration-500 ease-in-out ${
-                isOpen
-                  ? "translate-x-0 opacity-100 max-w-lg"
-                  : "translate-x-20 opacity-0 max-w-0"
-              }`}
-            >
-              {navLinks.map((link, index) => (
-                <button
-                  key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className={`text-sm font-medium transition-colors duration-300 ${
-                    scrolled
-                      ? "text-gray-700 hover:text-blue-600"
-                      : "text-white hover:text-yellow-300"
-                  }`}
-                  style={{
-                    transitionDelay: isOpen ? `${index * 100}ms` : "0ms",
-                  }}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Custom Hamburger */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="ml-2 flex flex-col justify-between w-6 h-5 focus:outline-none"
-            >
-              <span
-                className={`block h-0.5 w-full rounded-sm bg-current transform transition duration-300 ease-in-out ${
-                  isOpen ? "rotate-45 translate-y-2" : ""
-                } ${scrolled ? "text-gray-800" : "text-white"}`}
-              />
-              <span
-                className={`block h-0.5 w-full rounded-sm bg-current transition-all duration-300 ease-in-out ${
-                  isOpen ? "opacity-0" : ""
-                } ${scrolled ? "text-gray-800" : "text-white"}`}
-              />
-              <span
-                className={`block h-0.5 w-full rounded-sm bg-current transform transition duration-300 ease-in-out ${
-                  isOpen ? "-rotate-45 -translate-y-2" : ""
-                } ${scrolled ? "text-gray-800" : "text-white"}`}
-              />
-            </button>
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => scrollToSection(link.href)}
+                className={`text-sm font-medium transition-colors duration-300 ${
+                  scrolled
+                    ? "text-gray-700 hover:text-blue-600"
+                    : "text-white hover:text-yellow-300"
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
           </div>
+
+          {/* Hamburger (mobile only) */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="ml-2 flex flex-col justify-between w-6 h-5 focus:outline-none md:hidden"
+          >
+            <span
+              className={`block h-0.5 w-full rounded-sm bg-current transform transition duration-300 ease-in-out ${
+                isOpen ? "rotate-45 translate-y-2" : ""
+              } ${scrolled ? "text-gray-800" : "text-white"}`}
+            />
+            <span
+              className={`block h-0.5 w-full rounded-sm bg-current transition-all duration-300 ease-in-out ${
+                isOpen ? "opacity-0" : ""
+              } ${scrolled ? "text-gray-800" : "text-white"}`}
+            />
+            <span
+              className={`block h-0.5 w-full rounded-sm bg-current transform transition duration-300 ease-in-out ${
+                isOpen ? "-rotate-45 -translate-y-2" : ""
+              } ${scrolled ? "text-gray-800" : "text-white"}`}
+            />
+          </button>
         </div>
       </div>
+
+      {/* Mobile dropdown menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white/95 backdrop-blur-md shadow-md">
+          <div className="flex flex-col px-4 py-3 space-y-2">
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => scrollToSection(link.href)}
+                className="text-gray-800 text-left py-2 px-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-colors"
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

@@ -138,48 +138,48 @@ const Projects: React.FC = () => {
 
       {/* Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-scale-in shadow-xl">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 animate-fade-in">
+          <div className="bg-white rounded-none sm:rounded-2xl w-full h-full sm:h-auto sm:max-h-[90vh] max-w-4xl overflow-y-auto animate-scale-in shadow-xl">
             {/* Header with image */}
             <div className="relative">
               <img
                 src={selectedProject.image}
                 alt={selectedProject.title}
-                className="w-full h-64 object-cover"
+                className="w-full h-40 sm:h-56 md:h-64 object-cover"
               />
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full transition-all hover:scale-110"
+                className="absolute top-3 right-3 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full transition-all hover:scale-110"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <h2 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h2>
-                <p className="text-gray-200">{selectedProject.description}</p>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{selectedProject.title}</h2>
+                <p className="text-gray-200 text-sm sm:text-base">{selectedProject.description}</p>
               </div>
             </div>
 
             {/* Content */}
-            <div className="p-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Overview</h3>
-              <p className="text-gray-600 leading-relaxed">{selectedProject.longDescription}</p>
+            <div className="p-4 sm:p-6 md:p-8">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Overview</h3>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{selectedProject.longDescription}</p>
 
-              <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Key Features</h3>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mt-8 mb-4">Key Features</h3>
               <ul className="space-y-2">
                 {selectedProject.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2" />
-                    <span className="text-gray-700">{feature}</span>
+                    <span className="text-gray-700 text-sm sm:text-base">{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Technologies</h3>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mt-8 mb-4">Technologies</h3>
               <div className="flex flex-wrap gap-2">
                 {selectedProject.technologies.map((tech, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-gray-800 rounded-full text-sm font-medium border border-blue-200"
+                    className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-gray-800 rounded-full text-xs sm:text-sm font-medium border border-blue-200"
                   >
                     {tech}
                   </span>
@@ -191,7 +191,7 @@ const Projects: React.FC = () => {
                   href={selectedProject.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-all"
+                  className="flex items-center gap-2 bg-gray-900 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-gray-800 transition-all text-sm sm:text-base"
                 >
                   <Github size={18} />
                   View Code
