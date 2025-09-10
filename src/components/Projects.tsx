@@ -139,7 +139,7 @@ const Projects: React.FC = () => {
       {/* Modal */}
       {selectedProject && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 animate-fade-in">
-          <div className="bg-white rounded-none sm:rounded-2xl w-full h-full sm:h-auto sm:max-h-[90vh] max-w-4xl overflow-y-auto animate-scale-in shadow-xl">
+          <div className="bg-white rounded-none sm:rounded-2xl w-full h-full sm:h-auto sm:max-h-[90vh] max-w-4xl overflow-y-auto animate-scale-in shadow-xl relative">
             {/* Header with image */}
             <div className="relative">
               <img
@@ -147,9 +147,10 @@ const Projects: React.FC = () => {
                 alt={selectedProject.title}
                 className="w-full h-40 sm:h-56 md:h-64 object-cover"
               />
+              {/* ❌ FIXED BUTTON */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-3 right-3 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full transition-all hover:scale-110"
+                className="absolute top-3 right-3 z-50 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full transition-all hover:scale-110"
               >
                 <X size={18} />
               </button>
@@ -203,7 +204,7 @@ const Projects: React.FC = () => {
       )}
 
       {/* Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in {
           from {
             opacity: 0;
